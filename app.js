@@ -80,12 +80,6 @@ const questions = [
 
 {
     type: "input",
-    name: "contributing",
-    message: "Who all contributed in building your application?"
-},
-
-{
-    type: "input",
     name: "officeNumber",
     message: "Which office number can you be located? "
 },
