@@ -33,3 +33,79 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+const questions = [
+{   
+    type: "input",
+    name: "name",
+    message: "Enter your preferred name: "
+},
+
+{
+    type: "input",
+    name: "email",
+    message: "What is your email address? "
+},
+
+{
+    type: "input",
+    name: "id",
+    message: "Enter your Employee ID: "
+},
+
+{
+    type: "list",
+    name: "Role",
+    message: "What is your role on the team? ",
+    choices: [
+        "Employee",
+        "Engineer",
+        "Intern",
+        "Manager",
+    ]
+},
+
+{
+    type: "input",
+    name: "github",
+    message: "What is your GitHub Username:"
+},
+
+{
+    type: "input",
+    name: "school",
+    message: "What School do you currently attend? "
+},
+
+{
+    type: "input",
+    name: "contributing",
+    message: "Who all contributed in building your application?"
+},
+
+{
+    type: "input",
+    name: "officeNumber",
+    message: "Which office number can you be located? "
+},
+
+];
+
+// // function to write HTML file
+
+// function writeToFile(fileName, data) {
+//     return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+// }
+
+// // function to initialize program
+
+// function init() {
+//     inquirer.prompt(questions)
+//     .then(response => {
+//     writeToFile("README.md", generateMarkdown(response))
+//     })
+// }
+
+// // function call to initialize program
+// init();
