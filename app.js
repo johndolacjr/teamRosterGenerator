@@ -36,7 +36,7 @@ var teamMembers = []
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-// function to create Manager
+// Function to Create Manager
 
 function createManager() {
     inquirer.prompt([{
@@ -61,7 +61,7 @@ function createManager() {
         type: "input",
         name: "officeNumber",
         message: "Enter teammates office number: "
-    }]).then (function (data) {
+    }]).then(function (data) {
         const manager = new Manager(data.name, data.email, data.id, data.officeNumber)
         teamMembers.push(manager)
         createTeammate()
@@ -92,7 +92,7 @@ function createEngineer() {
         type: "input",
         name: "github",
         message: "Enter teammates GitHub username:  "
-    }]).then (function (data) {
+    }]).then(function (data) {
         const engineer = new Engineer(data.name, data.email, data.id, data.github)
         teamMembers.push(engineer)
         createTeammate()
@@ -123,7 +123,7 @@ function createIntern() {
         type: "input",
         name: "school",
         message: "Enter teammates School name:  "
-    }]).then (function (data) {
+    }]).then(function (data) {
         const intern = new Intern(data.name, data.email, data.id, data.school)
         teamMembers.push(intern)
         createTeammate()
@@ -131,76 +131,35 @@ function createIntern() {
 }
 
 //CReate Teammate Function 
-    function createTeammate() {
-        inquirer.prompt ({
-            type: "list", 
-            name: "newTeammate",
-            message: "What type of teammate would you like to add?", 
-            choices: [
-                "Engineer",
-                "Intern",
-                "No More Teammates", 
-            ]
-        }).then (function(data) {
-            switch (data.newTeammate) {
-                case "Engineer":
-                    createEngineer();
+function createTeammate() {
+    inquirer.prompt({
+        type: "list",
+        name: "newTeammate",
+        message: "What type of teammate would you like to add?",
+        choices: [
+            "Engineer",
+            "Intern",
+            "No More Teammates",
+        ]
+    }).then(function (data) {
+        switch (data.newTeammate) {
+            case "Engineer":
+                createEngineer();
                 break;
-                case "Intern":
-                    createIntern();
-                break; 
-                default:
-                    buildTeam(); 
-            }
-        })
-    }
+            case "Intern":
+                createIntern();
+                break;
+            default:
+                buildTeam();
+        }
+    })
+}
 
 // Function to build your team.
-    function buildTeam() {
-        if (!fs.existsSync(OUTPUT_DIR)) {
-            fs.mkdirSync(OUTPUT_DIR)
-        }
-        fs.writeFileSync(outputPath, render(teamMembers), "utf-8")
+function buildTeam() {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR)
     }
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8")
+}
 
-const questions = [
-{   
-    type: "input",
-    name: "name",
-    message: "Enter your preferred name: "
-},
-
-{
-    type: "input",
-    name: "email",
-    message: "What is your email address? "
-},
-
-{
-    type: "input",
-    name: "id",
-    message: "Enter your Employee ID: "
-},
-
-{
-    type: "list",
-    name: "Role",
-    message: "What is your role on the team? ",
-    
-},
-
-{
-    type: "input",
-    name: "github",
-    message: "What is your GitHub Username:"
-},
-
-{
-    type: "input",
-    name: "school",
-    message: "What School do you currently attend? "
-},
-
-
-
-];
