@@ -9,7 +9,9 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { listenerCount } = require("process");
 
+var teamMembers = [] 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -34,6 +36,132 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
+// function to create Manager
+
+function createManager() {
+    inquirer.prompt([{
+        type: "input",
+        name: "name",
+        message: "Enter teammates preferred name: "
+    },
+
+    {
+        type: "input",
+        name: "email",
+        message: "Enter teammates email address: "
+    },
+
+    {
+        type: "input",
+        name: "id",
+        message: "Enter teammates Employee ID: "
+    },
+
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "Enter teammates office number: "
+    }]).then (function (data) {
+        const manager = new Manager(data.name, data.email, data.id, data.officeNumber)
+        teamMembers.push(manager)
+        createTeammate()
+    })
+}
+
+// Ceate Engineer Function 
+function createEngineer() {
+    inquirer.prompt([{
+        type: "input",
+        name: "name",
+        message: "Enter teammates preferred name: "
+    },
+
+    {
+        type: "input",
+        name: "email",
+        message: "Enter teammates email address: "
+    },
+
+    {
+        type: "input",
+        name: "id",
+        message: "Enter teammates Employee ID: "
+    },
+
+    {
+        type: "input",
+        name: "github",
+        message: "Enter teammates GitHub username:  "
+    }]).then (function (data) {
+        const engineer = new Engineer(data.name, data.email, data.id, data.github)
+        teamMembers.push(engineer)
+        createTeammate()
+    })
+}
+// Create Intern Function 
+
+function createIntern() {
+    inquirer.prompt([{
+        type: "input",
+        name: "name",
+        message: "Enter teammates preferred name: "
+    },
+
+    {
+        type: "input",
+        name: "email",
+        message: "Enter teammates email address: "
+    },
+
+    {
+        type: "input",
+        name: "id",
+        message: "Enter teammates Employee ID: "
+    },
+
+    {
+        type: "input",
+        name: "school",
+        message: "Enter teammates School name:  "
+    }]).then (function (data) {
+        const intern = new Intern(data.name, data.email, data.id, data.school)
+        teamMembers.push(intern)
+        createTeammate()
+    })
+}
+
+//CReate Teammate Function 
+    function createTeammate() {
+        inquirer.prompt ({
+            type: "list", 
+            name: "newTeammate",
+            message: "What type of teammate would you like to add?", 
+            choices: [
+                "Engineer",
+                "Intern",
+                "No More Teammates", 
+            ]
+        }).then (function(data) {
+            switch (data.newTeammate) {
+                case "Engineer":
+                    createEngineer();
+                break;
+                case "Intern":
+                    createIntern();
+                break; 
+                default:
+                    buildTeam(); 
+            }
+        })
+    }
+
+// Function to build your team.
+    function buildTeam() {
+        if (!fs.existsSync(OUTPUT_DIR)) {
+            fs.mkdirSync(OUTPUT_DIR)
+        }
+        fs.writeFileSync(outputPath, render(teamMembers), "utf-8")
+    }
 
 const questions = [
 {   
@@ -58,12 +186,7 @@ const questions = [
     type: "list",
     name: "Role",
     message: "What is your role on the team? ",
-    choices: [
-        "Employee",
-        "Engineer",
-        "Intern",
-        "Manager",
-    ]
+    
 },
 
 {
@@ -78,28 +201,6 @@ const questions = [
     message: "What School do you currently attend? "
 },
 
-{
-    type: "input",
-    name: "officeNumber",
-    message: "Which office number can you be located? "
-},
+
 
 ];
-
-// // function to write HTML file
-
-// function writeToFile(fileName, data) {
-//     return fs.writeFileSync(path.join(process.cwd(), fileName), data)
-// }
-
-// // function to initialize program
-
-// function init() {
-//     inquirer.prompt(questions)
-//     .then(response => {
-//     writeToFile("README.md", generateMarkdown(response))
-//     })
-// }
-
-// // function call to initialize program
-// init();
