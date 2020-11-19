@@ -2,7 +2,8 @@
   * The Teammate Generator
 
 ## App Screenshot Link
-  * Link: https://raw.githubusercontent.com/johndolacjr/teamRosterGenerator/master/MyTeamScreenshot.png
+  * Image Link: https://raw.githubusercontent.com/johndolacjr/teamRosterGenerator/master/MyTeamScreenshot.png
+  * Video Link:  https://youtu.be/-Dnnzh3-ffE 
 
 ## Description
   * As a user, you should be able to build your team roster through inquirer prompts to generate an HTML roster of the teammates you manage. Each teammate role requires consistent questions as well as one role specific differentiating question. 
