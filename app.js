@@ -9,7 +9,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { listenerCount } = require("process");
 
 var teamMembers = []
 
@@ -140,6 +139,7 @@ function buildTeam() {
     fs.writeFileSync(outputPath, render(teamMembers), "utf-8")
 }
 
+createManager();
 
 
 
